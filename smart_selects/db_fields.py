@@ -66,7 +66,6 @@ class ChainedManyToManyField(ManyToManyField):
         defaults = {
             'form_class': form_fields.ChainedModelMultiChoiceField,
             'queryset': self.rel.to._default_manager.complex_filter(self.rel.limit_choices_to),
-            'to_field_name': self.chain_field,
             'app_name': self.app_name,
             'model_name': self.model_name,
             'chain_field': self.chain_field,

@@ -244,7 +244,8 @@ class ChainedMultiSelect(SelectMultiple):
             auto_choose = 'true'
         else:
             auto_choose = 'false'
-        empty_label = iter(self.choices).next()[1]  # Hacky way to getting the correct empty_label from the field instead of a hardcoded '--------'
+        #empty_label = iter(self.choices).next()[1]  # Hacky way to getting the correct empty_label from the field instead of a hardcoded '--------'
+        empty_label = '------'
         js = """
         <script type="text/javascript">
         //<![CDATA[
@@ -339,6 +340,7 @@ class ChainedMultiSelect(SelectMultiple):
         final_choices = []
 
         if value:
+            """
             item = self.queryset.filter(pk=value)[0]
             try:
                 pk = getattr(item, self.model_field + "_id")
@@ -357,6 +359,7 @@ class ChainedMultiSelect(SelectMultiple):
             filtered.sort(cmp=locale.strcoll, key=lambda x: unicode_sorter(unicode(x)))
             for choice in filtered:
                 final_choices.append((choice.pk, unicode(choice)))
+            """
         if len(final_choices) > 1:
             final_choices = [("", (empty_label))] + final_choices
         if self.show_all:
